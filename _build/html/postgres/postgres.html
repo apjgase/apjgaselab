@@ -1,0 +1,2000 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>LAB: Postgres DB</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LAB: VDBench" href="../vdbench/vdbench.html" />
+    <link rel="prev" title="APJ Global Accounts SE Labs" href="../index.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  </head><body>
+
+  <div id="navbar" class="navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/NutanixWorkshops.svg"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Labs</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LAB: Postgres DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#postgres-db-vm">Postgres DB VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-vm">Monitoring VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hammer-db">Hammer DB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vdbench/vdbench.html">LAB: VDBench</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../terraform/terraform.html">LAB: Terraform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oracle/oracle.html">LAB: Oracle DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption"><span class="caption-text">Labs</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LAB: Postgres DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#postgres-db-vm">Postgres DB VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-vm">Monitoring VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hammer-db">Hammer DB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vdbench/vdbench.html">LAB: VDBench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terraform/terraform.html">LAB: Terraform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oracle/oracle.html">LAB: Oracle DB</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <div class="section" id="lab-postgres-db">
+<span id="postgres"></span><h1>LAB: Postgres DB<a class="headerlink" href="#lab-postgres-db" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="postgres-db-vm">
+<h2>Postgres DB VM<a class="headerlink" href="#postgres-db-vm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Create a VM with 8 (minimum) or 12/16 (recommended) vCPUs and at least 32 Gb of memory. Use Centos-7-x86_64-GenericCloud image.</p></li>
+<li><p>Attach additional drives:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>scsi 1,2,3,4 - 60Gb each (recommended); 30Gb each (minimum) for data</p></li>
+<li><p>scsi 5,6 - 20 Gb (recommended); 10Gb each (minimum) for logs</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Add the following cloud-init script:</p>
+<blockquote>
+<div><div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1">#cloud-config</span>
+<span class="nt">disable_root</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">ssh_enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">ssh_pwauth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+ 
+<span class="c1">#create user</span>
+<span class="nt">users</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nutanix</span>
+    <span class="nt">groups</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sudo</span>
+    <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
+    <span class="nt">lock_passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">sudo</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL&#39;</span><span class="p p-Indicator">]</span>
+    <span class="nt">passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$6$4guEcDvX$HBHMFKXp4x/Eutj0OW5JGC6f1toudbYs.q.WkvXGbUxUTzNcHawKRRwrPehIxSXHVc70jFOp3yb8yZgjGUuET.</span>
+<span class="c1">#set password   </span>
+<span class="c1">#chpasswd:</span>
+<span class="c1">#    list: |</span>
+<span class="c1">#        SETYOURNAME:SETYOURPASSWORD</span>
+<span class="c1">#    expire: False</span>
+
+<span class="nt">yum_repos</span><span class="p">:</span>
+  <span class="nt">epel-release</span><span class="p">:</span>
+    <span class="nt">baseurl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://download.fedoraproject.org/pub/epel/7/$basearch</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">failovermethod</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">priority</span>
+    <span class="nt">gpgcheck</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">gpgkey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Extra Packages for Enterprise Linux 7 - Release</span>
+
+<span class="nt">package_update</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">package_upgrade</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">packages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gcc-c++</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">make</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">unzip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bash-completion</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python-pip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntp</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntpdate</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python36</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python36-setuptools</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">htop</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wget</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">iotop</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">xfs*</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">unzip</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lvm2*</span>
+
+<span class="c1">#postgres tuning</span>
+<span class="nt">write_files</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ACTION==&quot;add|change&quot;, SUBSYSTEM==&quot;block&quot;, RUN+=&quot;/bin/sh -c &#39;/bin/echo 1024 &gt; /sys%p/queue/max_sectors_kb&#39;&quot;</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/udev/rules.d/71-block-max-sectors.rules</span>
+      <span class="nt">permissions</span><span class="p">:</span> <span class="s">&#39;0644&#39;</span>
+      <span class="nt">owner</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">root:root</span>
+    <span class="p p-Indicator">-</span> <span class="nt">content</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">#!/bin/bash</span>
+       
+        <span class="no">vm_memory_kb_80_percent=`grep MemTotal /proc/meminfo | awk &#39;{print $2}&#39; | xargs -I {} echo &quot;{}*0.8&quot; | bc | awk -F&quot;.&quot; &#39; {print $1}&#39;`</span>
+        <span class="no">hugepage_size=`grep Hugepagesize /proc/meminfo | awk {&#39;print $2&#39;}`</span>
+        <span class="no">nr_huge_pages=`echo $(( vm_memory_kb_80_percent / $hugepage_size +1))`</span>
+       
+        <span class="no">echo &quot;#PostgreSQL BPG</span>
+             <span class="no">vm.overcommit_memory=1</span>
+             <span class="no">vm.dirty_background_ratio=5</span>
+             <span class="no">vm.dirty_ratio=15</span>
+             <span class="no">vm.dirty_expire_centisecs=500</span>
+             <span class="no">vm.dirty_writeback_centisecs=100</span>
+             <span class="no">vm.swappiness=0</span>
+             <span class="no">vm.nr_hugepages=$nr_huge_pages&quot; | sudo tee -a /etc/sysctl.conf</span>
+        <span class="no">sudo sed -i &#39;s/enforcing/disabled/g&#39; /etc/selinux/config /etc/selinux/config   </span>
+        <span class="no">sudo cp /etc/default/grub /etc/default/grub.bak</span>
+        <span class="no">sudo sed -i &#39;s/quiet/iommu=soft elevator=noop apm=off transparent_hugepage=never powersaved=off/g&#39; /etc/default/grub</span>
+        <span class="no">sudo grub2-mkconfig -o /boot/grub2/grub.cfg</span>
+        <span class="no">sudo reboot</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/tmp/vm_setup.sh</span>
+      <span class="nt">permissions</span><span class="p">:</span> <span class="s">&#39;0644&#39;</span>
+      <span class="nt">owner</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">root:root</span>
+<span class="nt">runcmd</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sudo yum install -y bc</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl stop firewalld</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl disable firewalld</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/sbin/setenforce 0</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sed -i -e &#39;s/enforcing/disabled/g&#39; /etc/selinux/config</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl restart ntpd</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bash /tmp/vm_setup.sh &gt; /tmp/t.out</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>After reboot, log in via ssh to configure LVM, install and configure Postgres:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1">#Postgres DB server setup</span>
+<span class="c1">#Centos-7-x86_64-GenericCloud image</span>
+
+<span class="c1">#---------</span>
+<span class="c1">#Configure disks/LVM</span>
+<span class="c1">#---------</span>
+
+<span class="c1">##############</span>
+<span class="c1">#</span>
+<span class="c1"># LVM setup script for PostgreSQL . 4 disks for DATA and 2 for logs</span>
+<span class="c1"># Data disks are 60GB | Log disks are 20GB </span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+ 
+ 
+<span class="c1">#PGSQL data</span>
+sudo pvcreate /dev/sdb /dev/sdc /dev/sdd /dev/sde
+sudo vgcreate pgDataVG /dev/sdb /dev/sdd /dev/sdc /dev/sde
+sudo lvcreate -l <span class="m">100</span>%FREE -i4 -I1M -n pgDataLV pgDataVG          <span class="c1">## Use 1MB to avoid IO amplification</span>
+<span class="c1">#lvcreate -l 100%FREE -i4 -I4M -n pgDataLV pgDataVG</span>
+ 
+ 
+<span class="c1">#PGSQL logs</span>
+sudo pvcreate /dev/sdf /dev/sdg 
+sudo vgcreate pgLogVG /dev/sdf /dev/sdg
+sudo lvcreate -l <span class="m">100</span>%FREE -i2 -I1M -n pgLogLV pgLogVG            <span class="c1">## Use 1MB to avoid IO amplification</span>
+<span class="c1">#lvcreate -l 100%FREE -i2 -I4M -n pgLogLV pgLogVG</span>
+ 
+ 
+<span class="c1">#Disable LVM read ahead</span>
+sudo lvchange -r <span class="m">0</span> /dev/pgDataVG/pgDataLV
+sudo lvchange -r <span class="m">0</span> /dev/pgLogVG/pgLogLV
+ 
+ 
+<span class="c1">#Format LVMs with ext4 and use nodiscard to make sure format time is fast on Nutanix due to SCSI unmap</span>
+sudo mkfs.ext4 -E nodiscard /dev/pgDataVG/pgDataLV
+sudo mkfs.ext4 -E nodiscard /dev/pgLogVG/pgLogLV
+ 
+<span class="nb">echo</span> <span class="s2">&quot;LVM configured&quot;</span>
+
+<span class="c1">#---------</span>
+<span class="c1">#Postgres setup</span>
+<span class="c1">#---------</span>
+
+ 
+sudo wget -c https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+sudo yum -y install pgdg-centos96-9.6-3.noarch.rpm
+sudo rpm --import http://packages.2ndquadrant.com/repmgr/RPM-GPG-KEY-repmgr
+sudo yum install -y http://packages.2ndquadrant.com/repmgr/yum-repo-rpms/repmgr-rhel-1.0-1.noarch.rpm
+ 
+<span class="c1"># Install PostgreSQL</span>
+sudo yum -y install postgresql96 postgresql96-contrib postgresql96-server postgresql96-devel postgresql96-plpython
+ 
+<span class="nb">echo</span> <span class="s2">&quot;Postgres installed&quot;</span>
+<span class="c1">#------- </span>
+<span class="c1">#Postgres config:</span>
+<span class="c1">#------</span>
+ 
+
+<span class="c1">#run initdb</span>
+sudo /usr/pgsql-9.6/bin/postgresql96-setup initdb
+ 
+<span class="c1">#start and stop postgresql to make sure DB creates the required directories</span>
+sudo systemctl start postgresql-9.6.service
+sudo systemctl stop postgresql-9.6.service
+ 
+<span class="c1">##copy the created postgres directory to a temp directory</span>
+ 
+sudo mkdir /tmp/pgsql
+ 
+sudo mv /var/lib/pgsql/9.6/data /tmp/pgsql
+ 
+<span class="c1">#Create directory , fix permissions and Mount LVM</span>
+sudo mkdir /var/lib/pgsql/9.6/data/
+sudo mount -o noatime,barrier<span class="o">=</span><span class="m">0</span> /dev/pgDataVG/pgDataLV /var/lib/pgsql/9.6/data/
+ 
+sudo mkdir /var/lib/pgsql/9.6/data/pg_xlog
+sudo mount -o noatime,barrier<span class="o">=</span><span class="m">0</span> /dev/pgLogVG/pgLogLV /var/lib/pgsql/9.6/data/pg_xlog
+ 
+sudo chown -R postgres:postgres /var/lib/pgsql/9.6/data/
+ 
+<span class="c1">#move the xlog to the new LVM</span>
+sudo find /tmp/pgsql/data/pg_xlog -maxdepth <span class="m">1</span> -mindepth <span class="m">1</span> -exec mv -t /var/lib/pgsql/9.6/data/pg_xlog/ <span class="o">{}</span> +
+ 
+<span class="c1">#remove pg_xlog from temp dir to avoid being copied again</span>
+sudo rm -rf /tmp/pgsql/data/pg_xlog
+ 
+<span class="c1">#move the pgsql directory to the LVM</span>
+sudo find /tmp/pgsql/data -maxdepth <span class="m">1</span> -mindepth <span class="m">1</span> -exec mv -t /var/lib/pgsql/9.6/data/ <span class="o">{}</span> +
+ 
+sudo chmod -R <span class="m">0700</span> /var/lib/pgsql/9.6/data
+ 
+<span class="c1">#enable service on boot</span>
+sudo systemctl <span class="nb">enable</span> postgresql-9.6.service
+ 
+<span class="c1">#add mount points to /etc/fstab</span>
+<span class="nb">echo</span> <span class="s2">&quot;/dev/mapper/pgDataVG-pgDataLV /var/lib/pgsql/9.6/data ext4 rw,seclabel,noatime,nobarrier,stripe=4096,data=ordered 0 0&quot;</span> <span class="p">|</span> sudo tee -a /etc/fstab
+<span class="nb">echo</span> <span class="s2">&quot;/dev/mapper/pgLogVG-pgLogLV /var/lib/pgsql/9.6/data/pg_xlog ext4 rw,seclabel,noatime,nobarrier,stripe=2048,data=ordered 0 0&quot;</span> <span class="p">|</span> sudo tee -a  /etc/fstab
+
+<span class="c1">#allow external connections</span>
+<span class="nb">echo</span> <span class="s2">&quot;listen_addresses = &#39;*&#39;&quot;</span> <span class="p">|</span> sudo tee -a /var/lib/pgsql/9.6/data/postgresql.conf
+<span class="nb">echo</span> <span class="s2">&quot;host    all             all              0.0.0.0/0                       password&quot;</span> <span class="p">|</span> sudo tee -a /var/lib/pgsql/9.6/data/pg_hba.conf
+<span class="nb">echo</span> <span class="s2">&quot;host    all             all              ::/0                            password&quot;</span> <span class="p">|</span> sudo tee -a /var/lib/pgsql/9.6/data/pg_hba.conf
+
+<span class="nb">echo</span> <span class="s2">&quot;Postgres configured&quot;</span>
+ 
+sudo systemctl status postgresql-9.6
+sudo systemctl restart postgresql-9.6
+sudo systemctl status postgresql-9.6
+
+sudo -u postgres psql -U postgres -d postgres -c <span class="s2">&quot;alter user postgres with password &#39;nutanix&#39;;&quot;</span>
+ 
+<span class="nb">echo</span> <span class="s2">&quot;Postgres password changed&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Install and configure data collectors for Postgres and node monitoring:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#setup and configure Postgres and node monitoring for Prometheus</span>
+<span class="c1">#will listen on :9100</span>
+
+sudo wget https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz
+sudo tar -xvzf node_exporter-0.17.0.linux-amd64.tar.gz
+sudo useradd -rs /bin/false nodeusr
+sudo mv node_exporter-0.17.0.linux-amd64/node_exporter /usr/local/bin/
+
+<span class="nb">echo</span> <span class="s2">&quot;[Unit]</span>
+<span class="s2">Description=Node Exporter</span>
+<span class="s2">After=network.target</span>
+
+<span class="s2">[Service]</span>
+<span class="s2">User=nodeusr</span>
+<span class="s2">Group=nodeusr</span>
+<span class="s2">Type=simple</span>
+<span class="s2">ExecStart=/usr/local/bin/node_exporter</span>
+
+<span class="s2">[Install]</span>
+<span class="s2">WantedBy=multi-user.target&quot;</span> <span class="p">|</span> sudo tee -a /etc/systemd/system/node_exporter.service
+
+sudo systemctl daemon-reload
+sudo systemctl <span class="nb">enable</span> node_exporter
+sudo systemctl start node_exporter
+
+<span class="c1">#setup and configure postgres exporter for Prometheus</span>
+<span class="c1">#will listen on :9187</span>
+sudo wget https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.7/postgres_exporter_v0.4.7_linux-amd64.tar.gz
+sudo tar -xvzf postgres_exporter_v0.4.7_linux-amd64.tar.gz
+sudo cp postgres_exporter_v0.4.7_linux-amd64/postgres_exporter  /usr/local/bin/
+sudo chown postgres:postgres /usr/local/bin/postgres_exporter
+
+<span class="nb">echo</span> <span class="s1">&#39;[Unit]</span>
+<span class="s1">Description=Prometheus PostgreSQL Exporter</span>
+<span class="s1">After=network.target</span>
+
+<span class="s1">[Service]</span>
+<span class="s1">User=postgres</span>
+<span class="s1">Group=postgres</span>
+<span class="s1">Type=simple</span>
+<span class="s1">Environment=&quot;DATA_SOURCE_NAME=user=postgres host=/var/run/postgresql/ sslmode=disable&quot;</span>
+<span class="s1">ExecStart=/usr/local/bin/postgres_exporter --web.listen-address=:9187</span>
+<span class="s1">Restart=always</span>
+
+<span class="s1">[Install]</span>
+<span class="s1">WantedBy=multi-user.target&#39;</span> <span class="p">|</span> sudo tee -a /etc/systemd/system/postgres_exporter.service
+
+sudo systemctl daemon-reload
+sudo systemctl <span class="nb">enable</span> postgres_exporter
+sudo systemctl start postgres_exporter
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="monitoring-vm">
+<h2>Monitoring VM<a class="headerlink" href="#monitoring-vm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>It’s recommended to run a monitoring VM on the separate cluster.</p></li>
+<li><p>Deploy a VM (4VCPU/8Gb/Use Centos-7-x86_64-GenericCloud image) with generic cloud-init script.</p>
+<blockquote>
+<div><div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1">#cloud-config</span>
+<span class="nt">disable_root</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">ssh_enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">ssh_pwauth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+<span class="c1">#create user</span>
+<span class="nt">users</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nutanix</span>
+    <span class="nt">groups</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sudo</span>
+    <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
+    <span class="nt">lock_passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">sudo</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL&#39;</span><span class="p p-Indicator">]</span>
+    <span class="nt">passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$6$4guEcDvX$HBHMFKXp4x/Eutj0OW5JGC6f1toudbYs.q.WkvXGbUxUTzNcHawKRRwrPehIxSXHVc70jFOp3yb8yZgjGUuET.</span>
+<span class="c1">#set password   </span>
+<span class="c1">#chpasswd:</span>
+<span class="c1">#    list: |</span>
+<span class="c1">#        SETYOURNAME:SETYOURPASSWORD</span>
+<span class="c1">#    expire: False</span>
+
+<span class="nt">yum_repos</span><span class="p">:</span>
+  <span class="nt">epel-release</span><span class="p">:</span>
+    <span class="nt">baseurl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://download.fedoraproject.org/pub/epel/7/$basearch</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">failovermethod</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">priority</span>
+    <span class="nt">gpgcheck</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">gpgkey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Extra Packages for Enterprise Linux 7 - Release</span>
+
+<span class="nt">package_update</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">package_upgrade</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">packages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gcc-c++</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">make</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">unzip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bash-completion</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python-pip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntp</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntpdate</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python36</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python36-setuptools</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">htop</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wget</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">iotop</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">xfs*</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">unzip</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lvm2*</span>
+
+<span class="nt">runcmd</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl stop firewalld</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl disable firewalld</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/sbin/setenforce 0</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sed -i -e &#39;s/enforcing/disabled/g&#39; /etc/selinux/config</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/bin/python3.6 -m ensurepip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install -U pip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl restart ntpd</span>
+
+<span class="nt">final_message</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CentOS 7 Machine setup successfully!</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Install and configure Prometheus:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#install prometheus on Grafana server</span>
+<span class="c1">#!/bin/bash</span>
+
+sudo wget https://github.com/prometheus/prometheus/releases/download/v2.8.1/prometheus-2.8.1.linux-amd64.tar.gz
+sudo useradd --no-create-home --shell /bin/false prometheus
+sudo mkdir /etc/prometheus
+sudo mkdir /var/lib/prometheus
+sudo chown prometheus:prometheus /etc/prometheus
+sudo chown prometheus:prometheus /var/lib/prometheus
+sudo tar -xvzf prometheus-2.8.1.linux-amd64.tar.gz
+sudo mv prometheus-2.8.1.linux-amd64 prometheuspackage
+sudo cp prometheuspackage/prometheus /usr/local/bin/
+sudo cp prometheuspackage/promtool /usr/local/bin/
+sudo chown prometheus:prometheus /usr/local/bin/prometheus
+sudo chown prometheus:prometheus /usr/local/bin/promtool
+sudo cp -r prometheuspackage/consoles /etc/prometheus
+sudo cp -r prometheuspackage/console_libraries /etc/prometheus
+sudo chown -R prometheus:prometheus /etc/prometheus/consoles
+sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
+
+<span class="nb">echo</span> <span class="s2">&quot;global:</span>
+<span class="s2">  scrape_interval: 5s</span>
+
+<span class="s2">scrape_configs:</span>
+<span class="s2">  - job_name: &#39;prometheus_master&#39;</span>
+<span class="s2">    scrape_interval: 5s</span>
+<span class="s2">    static_configs:</span>
+<span class="s2">      - targets: [&#39;localhost:9090&#39;]&quot;</span> <span class="p">|</span> sudo tee -a /etc/prometheus/prometheus.yml
+      
+sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
+
+/etc/systemd/system/prometheus.service
+
+<span class="nb">echo</span> <span class="s2">&quot;[Unit]</span>
+<span class="s2">Description=Prometheus</span>
+<span class="s2">Wants=network-online.target</span>
+<span class="s2">After=network-online.target</span>
+
+<span class="s2">[Service]</span>
+<span class="s2">User=prometheus</span>
+<span class="s2">Group=prometheus</span>
+<span class="s2">Type=simple</span>
+<span class="s2">ExecStart=/usr/local/bin/prometheus \</span>
+<span class="s2">--config.file /etc/prometheus/prometheus.yml \</span>
+<span class="s2">--storage.tsdb.path /var/lib/prometheus/ \</span>
+<span class="s2">--web.console.templates=/etc/prometheus/consoles \</span>
+<span class="s2">--web.console.libraries=/etc/prometheus/console_libraries</span>
+
+<span class="s2">[Install]</span>
+<span class="s2">WantedBy=multi-user.target&quot;</span> <span class="p">|</span> sudo tee -a /etc/systemd/system/prometheus.service
+sudo systemctl daemon-reload
+sudo systemctl <span class="nb">enable</span> prometheus
+sudo systemctl start prometheus
+
+
+<span class="c1">#- job_name: &#39;node_exporter_centos&#39;</span>
+<span class="c1">#    scrape_interval: 5s</span>
+<span class="c1">#    static_configs:</span>
+<span class="c1">#      - targets: [&#39;10.94.10.209:9100&#39;]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Check if Prometheus is up and running by opening a <a class="reference external" href="http://monitoring_server_ip:9090">http://monitoring_server_ip:9090</a></p></li>
+<li><dl>
+<dt>Add postgres and node collectors to the Prometheus configuration file /etc/prometheus/prometheus.yml (replace POSTGRES_SERVER_IP with the ip address):</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#Postres monitoring</span>
+- job_name: <span class="s1">&#39;Postgres_exporter&#39;</span>
+    scrape_interval: 5s
+    static_configs:
+      - targets: <span class="o">[</span><span class="s1">&#39;POSTGRES_SERVER_IP:9187&#39;</span><span class="o">]</span>
+    
+- job_name: <span class="s1">&#39;Node_exporter_postgres&#39;</span>
+    scrape_interval: 5s
+    static_configs:
+      - targets: <span class="o">[</span><span class="s1">&#39;POSTGRES_SERVER_IP:9100&#39;</span><span class="o">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p>Install and configure Grafana</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>TBC</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Import Grafana dashboard:</dt><dd><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;annotations&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;list&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;builtIn&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;-- Grafana --&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;enable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;iconColor&quot;</span><span class="p">:</span> <span class="s2">&quot;rgba(0, 211, 255, 1)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Annotations &amp; Alerts&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;dashboard&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Performance metrics for Postgres/host&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;editable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;gnetId&quot;</span><span class="p">:</span> <span class="mi">455</span><span class="p">,</span>
+  <span class="nt">&quot;graphTooltip&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+  <span class="nt">&quot;iteration&quot;</span><span class="p">:</span> <span class="mi">1561698381827</span><span class="p">,</span>
+  <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nt">&quot;panels&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;editable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;grid&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+      <span class="nt">&quot;isNew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;connected&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum(pg_stat_database_blks_hit{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}) / (sum(pg_stat_database_blks_hit{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}) + sum(pg_stat_database_blks_read{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}))&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;cache hit rate&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Cache hit ratio&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;msResolution&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cumulative&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;percentunit&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;cacheTimeout&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;alignAsTable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;dsType&quot;</span><span class="p">:</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;(sum(irate(pg_stat_database_xact_commit{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m])) + sum(irate(pg_stat_database_xact_rollback{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m])))*60&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;groupBy&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;$interval&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;null&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fill&quot;</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;QPM&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;measurement&quot;</span><span class="p">:</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;policy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;resultFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;xact_commit&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;10s&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;non_negative_derivative&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">1800</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$host$/&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;QPM&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;Busy&quot;</span><span class="p">:</span> <span class="s2">&quot;#EAB839&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Busy Iowait&quot;</span><span class="p">:</span> <span class="s2">&quot;#890F02&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Busy other&quot;</span><span class="p">:</span> <span class="s2">&quot;#1F78C1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Idle&quot;</span><span class="p">:</span> <span class="s2">&quot;#052B51&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Idle - Waiting for something to happen&quot;</span><span class="p">:</span> <span class="s2">&quot;#052B51&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;guest&quot;</span><span class="p">:</span> <span class="s2">&quot;#9AC48A&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;idle&quot;</span><span class="p">:</span> <span class="s2">&quot;#052B51&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;iowait&quot;</span><span class="p">:</span> <span class="s2">&quot;#EAB839&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;irq&quot;</span><span class="p">:</span> <span class="s2">&quot;#BF1B00&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;nice&quot;</span><span class="p">:</span> <span class="s2">&quot;#C15C17&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;softirq&quot;</span><span class="p">:</span> <span class="s2">&quot;#E24D42&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;steal&quot;</span><span class="p">:</span> <span class="s2">&quot;#FCE2DE&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;system&quot;</span><span class="p">:</span> <span class="s2">&quot;#508642&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;#5195CE&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;decimals&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Basic CPU info&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">7</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;alignAsTable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;rightSide&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sideWidth&quot;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;sortDesc&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;maxPerRow&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy Iowait&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#890F02&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;Idle&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#7EB26D&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy System&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#EAB839&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy User&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#0A437C&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy Other&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#6D1F62&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum by (instance)(irate(node_cpu_seconds_total{mode=\&quot;system\&quot;,instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;}[5m])) * 100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy System&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum by (instance)(irate(node_cpu_seconds_total{mode=&#39;user&#39;,instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;}[5m])) * 100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy User&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum by (instance)(irate(node_cpu_seconds_total{mode=&#39;iowait&#39;,instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;}[5m])) * 100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy Iowait&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum by (instance)(irate(node_cpu_seconds_total{mode=~\&quot;.*irq\&quot;,instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;}[5m])) * 100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy IRQs&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum (irate(node_cpu_seconds_total{mode!=&#39;idle&#39;,mode!=&#39;user&#39;,mode!=&#39;system&#39;,mode!=&#39;iowait&#39;,mode!=&#39;irq&#39;,mode!=&#39;softirq&#39;,instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;}[5m])) * 100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;Busy Other&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum by (mode)(irate(node_cpu_seconds_total{mode=&#39;idle&#39;,instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;}[5m])) * 100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;Idle&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;CPU Basic&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">7</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;alignAsTable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;hideZero&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;rightSide&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;maxPerRow&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*Read.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;negative-Y&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sda_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#7EB26D&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdb_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#EAB839&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdc_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#6ED0E0&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdd_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#EF843C&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sde_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#E24D42&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sda1.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#584477&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sda2_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#BA43A9&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sda3_.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#F4D598&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdb1.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#0A50A1&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdb2.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#BF1B00&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdb3.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#E0752D&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdc1.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#962D82&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdc2.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#614D93&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdc3.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#9AC48A&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdd1.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#65C5DB&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdd2.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#F9934E&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdd3.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#EA6460&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sde1.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#E0F9D7&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sdd2.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#FCEACA&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;/.*sde3.*/&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#F9E2D2&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;irate(node_disk_reads_completed_total{instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;,device=~\&quot;[a-z]*[a-z]\&quot;}[1m])&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;{{device}} - Reads completed&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">480</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;irate(node_disk_writes_completed_total{instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;,device=~\&quot;[a-z]*[a-z]\&quot;}[1m]) + irate(node_disk_reads_completed_total{instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;,device=~\&quot;[a-z]*[a-z]\&quot;}[1m])&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;{{device}} - IOPS&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Disk IOps&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;iops&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;IOPS&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;editable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;grid&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">14</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;isNew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;alignAsTable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;rightSide&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;connected&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;fetched&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;dsType&quot;</span><span class="p">:</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum(irate(pg_stat_database_tup_fetched{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m]))&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;groupBy&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;$interval&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;null&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fill&quot;</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;fetched&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;measurement&quot;</span><span class="p">:</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;policy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;resultFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;tup_fetched&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;10s&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;non_negative_derivative&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$host$/&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;fetched&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;dsType&quot;</span><span class="p">:</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum(irate(pg_stat_database_tup_returned{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m]))&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;groupBy&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;$interval&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;null&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fill&quot;</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;returned&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;measurement&quot;</span><span class="p">:</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;policy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;resultFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;tup_fetched&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;10s&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;non_negative_derivative&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$host$/&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;fetched&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;dsType&quot;</span><span class="p">:</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum(irate(pg_stat_database_tup_inserted{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m]))&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;groupBy&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;$interval&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;null&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fill&quot;</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;inserted&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;measurement&quot;</span><span class="p">:</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;policy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;resultFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;tup_fetched&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;10s&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;non_negative_derivative&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$host$/&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;fetched&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;dsType&quot;</span><span class="p">:</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum(irate(pg_stat_database_tup_updated{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m]))&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;groupBy&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;$interval&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;null&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fill&quot;</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;updated&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;measurement&quot;</span><span class="p">:</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;policy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;resultFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;tup_fetched&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;10s&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;non_negative_derivative&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$host$/&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;fetched&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;dsType&quot;</span><span class="p">:</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;sum(irate(pg_stat_database_tup_deleted{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}[5m]))&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;groupBy&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;$interval&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;null&quot;</span>
+              <span class="p">],</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fill&quot;</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;deleted&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;measurement&quot;</span><span class="p">:</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;policy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;resultFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;tup_fetched&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&quot;10s&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;non_negative_derivative&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">],</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$host$/&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Rows&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;msResolution&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cumulative&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;io time&quot;</span><span class="p">:</span> <span class="s2">&quot;#890F02&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;decimals&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">17</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;alignAsTable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;rightSide&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;sortDesc&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;maxPerRow&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;irate(node_disk_io_time_seconds_total{instance=~\&quot;$node:$port\&quot;,job=~\&quot;$nodejob\&quot;,device=~\&quot;[a-z]*[a-z]\&quot;} [5m])&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;{{device}} - latency&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Disk IO latency&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;aliasColors&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;bars&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;dashLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;dashes&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;editable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;fill&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;grid&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;h&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="mi">21</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+      <span class="nt">&quot;isNew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;legend&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;avg&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;nullPointMode&quot;</span><span class="p">:</span> <span class="s2">&quot;connected&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="nt">&quot;percentage&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;pointradius&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;renderer&quot;</span><span class="p">:</span> <span class="s2">&quot;flot&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;seriesOverrides&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;spaceLength&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nt">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;steppedLine&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;pg_stat_database_numbackends{datname=~\&quot;$db\&quot;,instance=~\&quot;$host\&quot;}&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;time_series&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;intervalFactor&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;legendFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;{{__name__}}&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;refId&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="mi">240</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;thresholds&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeFrom&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;timeRegions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&quot;timeShift&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Number of active connections&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;tooltip&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;msResolution&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cumulative&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;buckets&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;yaxes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;logBase&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;max&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;min&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;show&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;align&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;alignLevel&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;schemaVersion&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+  <span class="nt">&quot;style&quot;</span><span class="p">:</span> <span class="s2">&quot;dark&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;postgres&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;templating&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;list&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;allValue&quot;</span><span class="p">:</span> <span class="s2">&quot;.*&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;selected&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;All&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;$__all&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;definition&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;includeAll&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;multi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(up{job=~\&quot;postgres.*\&quot;},instance)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;skipUrlSync&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;tagValuesQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;tagsQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;useTags&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;allValue&quot;</span><span class="p">:</span> <span class="s2">&quot;.*&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;selected&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;tpcc&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;tpcc&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;definition&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;includeAll&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;multi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(pg_stat_database_tup_fetched{instance=~\&quot;$host\&quot;,datname!~\&quot;template.*|postgres\&quot;},datname)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;skipUrlSync&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;tagValuesQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;tagsQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;useTags&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;allValue&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;selected&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;node_exporter_centos&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;node_exporter_centos&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;definition&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info, job)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;includeAll&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;nodejob&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;multi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;nodejob&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info, job)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;skipUrlSync&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;tagValuesQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;tagsQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;useTags&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;allValue&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;selected&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;postgres1&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;postgres1&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;definition&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info{job=~\&quot;$nodejob\&quot;}, nodename)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;includeAll&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Node Host:&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;multi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info{job=~\&quot;$nodejob\&quot;}, nodename)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;skipUrlSync&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;tagValuesQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;tagsQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;useTags&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;allValue&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;selected&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;10.139.80.129&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.139.80.129&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;definition&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info{nodename=\&quot;$name\&quot;}, instance)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nt">&quot;includeAll&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;multi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;node&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info{nodename=\&quot;$name\&quot;}, instance)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;/([^:]+):.*/&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;skipUrlSync&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;tagValuesQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;tagsQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;useTags&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;allValue&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;selected&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;9100&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;9100&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus-1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;definition&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info{instance=~\&quot;$node:(.*)\&quot;}, instance)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hide&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;includeAll&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;node port&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;multi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;port&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;label_values(node_uname_info{instance=~\&quot;$node:(.*)\&quot;}, instance)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;/[^:]+:(.*)/&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;skipUrlSync&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;tagValuesQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;tagsQuery&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;useTags&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;from&quot;</span><span class="p">:</span> <span class="s2">&quot;now-30m&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;to&quot;</span><span class="p">:</span> <span class="s2">&quot;now&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;timepicker&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;refresh_intervals&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;5s&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;10s&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;30s&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;15m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;30m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;2h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1d&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;time_options&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;15m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;6h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;12h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;24h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;2d&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;7d&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;30d&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;timezone&quot;</span><span class="p">:</span> <span class="s2">&quot;browser&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Postgres Overview&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;wGgaPlciz&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="mi">15</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="hammer-db">
+<h2>Hammer DB<a class="headerlink" href="#hammer-db" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Download Hammer-DB howto from OneDrive share.</p></li>
+<li><dl class="simple">
+<dt>Follow the steps in the document, with the few changes:</dt><dd><ul class="simple">
+<li><p>select Postgres instead of Oracle</p></li>
+<li><p>Use not more than 40 users</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/postgres/postgres.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2018 Nutanix.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

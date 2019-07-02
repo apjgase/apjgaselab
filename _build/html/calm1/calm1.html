@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>LAB: Calm VPC 3-Tier app</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  </head><body>
+
+  <div id="navbar" class="navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/NutanixWorkshops.svg"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Labs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../postgres/postgres.html">LAB: Postgres DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../postgres/postgres.html#postgres-db-vm">Postgres DB VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../postgres/postgres.html#monitoring-vm">Monitoring VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../postgres/postgres.html#hammer-db">Hammer DB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vdbench/vdbench.html">LAB: VDBench</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vdbench/vdbench.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdbench/vdbench.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../terraform/terraform.html">LAB: Terraform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terraform/terraform.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terraform/terraform.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oracle/oracle.html">LAB: Oracle DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oracle/oracle.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oracle/oracle.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption"><span class="caption-text">Labs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../postgres/postgres.html">LAB: Postgres DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vdbench/vdbench.html">LAB: VDBench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terraform/terraform.html">LAB: Terraform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oracle/oracle.html">LAB: Oracle DB</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <div class="section" id="lab-calm-vpc-3-tier-app">
+<span id="calm1"></span><h1>LAB: Calm VPC 3-Tier app<a class="headerlink" href="#lab-calm-vpc-3-tier-app" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gcp">
+<h2>GCP<a class="headerlink" href="#gcp" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Login your gcp account under <em>project</em> in <em>nutanix</em> orgnization, for example <strong>APAC Solution DEMO</strong>, create <em>Service accounts</em> for your calm demo</p>
+<blockquote>
+<div><div class="figure align-default">
+<img alt="calm1/images/gcp1.png" src="calm1/images/gcp1.png" />
+</div>
+<ul class="simple">
+<li><p>Goto <strong>IAM &amp; admin</strong></p></li>
+</ul>
+<div class="figure align-default">
+<img alt="calm1/images/gcp1.png" src="calm1/images/gcp1.png" />
+</div>
+<ul class="simple">
+<li><p>Choose <strong>Service accounts</strong> from left panel</p></li>
+<li><p>Choose <strong>Create key</strong> from action list of existed service account in right panel</p></li>
+<li><p>Choose <strong>JSON</strong> format, and then click <strong>CREATE</strong></p></li>
+<li><p><strong>Save</strong> the key locally for following demo</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update Calm settings</p>
+<blockquote>
+<div><ul>
+<li><p>Click <strong>Settings</strong> of left navigate bar in Calm UI, Goto <strong>Providers</strong> tab.</p></li>
+<li><p>CLick <strong>Add Provider</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Name</strong> - GCP</p></li>
+<li><p><strong>TYPE</strong> - GCP</p></li>
+<li><p><strong>Service Account File</strong> - choose the file you just download from gcp</p></li>
+<li><p><strong>Save</strong> and <strong>Verify</strong></p></li>
+</ul>
+<div class="figure align-default">
+<img alt="calm1/images/gcp2.png" src="calm1/images/gcp2.png" />
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update Project settings</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Infrastructure</strong> - choose <em>Local and Cloud resources</em> if needed</p></li>
+<li><p><strong>GCP</strong> - choose the GCP account name you just created</p></li>
+<li><p><strong>Save</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="azure">
+<h2>Azure<a class="headerlink" href="#azure" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Check this video out: <a class="reference external" href="https://www.youtube.com/watch?v=7wNCiw1Jn5A">https://www.youtube.com/watch?v=7wNCiw1Jn5A</a></p></li>
+<li><p>Get directory ID</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Azure Active Directory</strong> - <strong>Properities</strong> - <strong>Directory ID</strong></p></li>
+<li><p>copy directory ID to <strong>Directory/Tenant ID</strong> in azure provider settings</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Get application ID &amp; key</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Azure Active Directory</strong> - <strong>App registrations</strong> - <strong>New application registration</strong></p>
+<blockquote>
+<div><ul>
+<li><p>name - <em>will be used below</em></p></li>
+<li><p>app type - Web app / API</p></li>
+<li><p>sign-on URL - <a class="reference external" href="https://10.139.80.4:9440/console/#page/explore/calm">https://10.139.80.4:9440/console/#page/explore/calm</a></p></li>
+<li><p>get <strong>application ID</strong> after click create</p></li>
+<li><p><strong>settings</strong> in this registered application</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>keys - add description of key and expires</p></li>
+<li><p>save keys, you will get the key value</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>copy application ID to <strong>Application/Client ID</strong> in azure provider settings</p></li>
+<li><p>copy key to <strong>Client Key/Secret</strong> in azure provider settings</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Get subscription ID</p>
+<blockquote>
+<div><ul>
+<li><p><strong>resource groups</strong> - Add</p></li>
+<li><p>open resource group and click <strong>Access control</strong></p></li>
+<li><p><strong>Add</strong> - <strong>Add role assignment</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Role</strong> - <strong>Contributor</strong></p></li>
+<li><p><strong>Select</strong> - <em>the application registration</em> you just created before</p></li>
+<li><p><strong>Save</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>copy subscription ID to <strong>Subscription ID</strong> in azure provider settings</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>now you could save and verify azure provider settings, and add it to your project.</p></li>
+<li><p>Goto <strong>Availability sets</strong>, create new one for your existed resource group.</p></li>
+<li><p>Goto <strong>Network security groups</strong>, create new one for your existed resource group.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>open the network security group you just create and set <strong>Inbound security rules</strong></p></li>
+<li><p>open port you want to expose</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Goto <strong>Virtual Networks</strong>, create on for your internal network</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Address space</strong> - 10.255.255.0/24</p></li>
+<li><p><strong>Address range</strong> - 10.255.255.0/25</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="aws-ec2">
+<h2>AWS EC2<a class="headerlink" href="#aws-ec2" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Goto <strong>IAM</strong> service on AWS</p></li>
+<li><p>Click <strong>Groups</strong> from left navigate bar, Click <strong>Create New Group</strong> from top button</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Group Name</strong> - calm_ec2</p></li>
+<li><p><strong>Attach Policy</strong> - <em>IAMReadOnlyAccess</em> and <em>AmazonEC2FullAccess</em></p></li>
+<li><p>review as following screenshot and <strong>Create Group</strong></p></li>
+</ul>
+<div class="figure align-default">
+<img alt="calm1/images/aws5.png" src="calm1/images/aws5.png" />
+</div>
+</div></blockquote>
+</li>
+<li><p>Click <strong>Users</strong> from left navigate bar, Click <strong>Create New User</strong> from top button</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>User Name</strong> - calm_ec2</p></li>
+<li><p><strong>Access Type</strong> - check <em>Programmatic access</em></p></li>
+<li><p><strong>Set permissions</strong> - <em>Add user to group</em></p></li>
+<li><p><strong>Group</strong> - <em>calm_ec2</em> (we created just now)</p></li>
+<li><p><strong>Add Tags</strong> - <em>skip</em></p></li>
+<li><p>review as following screenshot and <strong>Create User</strong></p></li>
+</ul>
+<div class="figure align-default">
+<img alt="calm1/images/aws13.png" src="calm1/images/aws13.png" />
+</div>
+<div class="figure align-default">
+<img alt="calm1/images/aws14.png" src="calm1/images/aws14.png" />
+</div>
+<ul class="simple">
+<li><p>note down <strong>Access key ID</strong> and <strong>Secret access key</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Prepare ssh key</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Goto <strong>EC2</strong> service on AWS</p></li>
+<li><p>Click <strong>Key Pairs</strong> from left navigate bar</p></li>
+<li><p>Click <strong>Import Key Pair</strong> from top button, and select your public key or use this one –&gt; <span class="xref std std-ref">ssh_key_pub</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Prepare images</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Goto <strong>EC2</strong> service on AWS</p></li>
+<li><p>Click <strong>instance</strong> from left navigate bar</p></li>
+<li><p>Launch instance as you needed</p></li>
+<li><p><strong>create image</strong> from this instance</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Prepare security group</p>
+<blockquote>
+<div><ul>
+<li><p>Goto <strong>EC2</strong> service on AWS</p></li>
+<li><p>Click <strong>Security Groups</strong> from left navigate bar</p></li>
+<li><p>Create a security group or modify existed one as follow</p>
+<blockquote>
+<div><ul>
+<li><p>Inbound</p>
+<blockquote>
+<div><div class="figure align-default">
+<img alt="calm1/images/secgroup1.png" src="calm1/images/secgroup1.png" />
+</div>
+</div></blockquote>
+</li>
+<li><p>Outbound</p>
+<blockquote>
+<div><div class="figure align-default">
+<img alt="calm1/images/secgroup2.png" src="calm1/images/secgroup2.png" />
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update Calm settings</p>
+<blockquote>
+<div><ul>
+<li><p>Click <strong>Settings</strong> of left navigate bar in Calm UI, Goto <strong>Providers</strong> tab.</p></li>
+<li><p>CLick <strong>Add Provider</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Name</strong> - <em>calm_aws</em></p></li>
+<li><p><strong>TYPE</strong> - <em>AWS</em></p></li>
+<li><p><strong>Access key ID</strong> - <em>get access key id from previous step</em></p></li>
+<li><p><strong>Secret access key</strong> - <em>get secret access key from previous step</em></p></li>
+<li><p><strong>Save</strong> and <strong>Verify</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update Project settings</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Infrastructure</strong> - choose <em>Local and Cloud resources</em> if needed</p></li>
+<li><p><strong>AWS</strong> - choose the AWS account name you just created</p></li>
+<li><p><strong>Save</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="karbon">
+<h3>Karbon<a class="headerlink" href="#karbon" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="google-gke">
+<h3>Google GKE<a class="headerlink" href="#google-gke" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="azure-aks">
+<h3>Azure AKS<a class="headerlink" href="#azure-aks" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="amazon-eks">
+<h3>Amazon EKS<a class="headerlink" href="#amazon-eks" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/calm1/calm1.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2018 Nutanix.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

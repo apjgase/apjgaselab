@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Labs for APJ Global Accounts SE</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LAB: Postgres DB" href="postgres/postgres.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  </head><body>
+
+  <div id="navbar" class="navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span><img src="_static/NutanixWorkshops.svg"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Labs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="postgres/postgres.html">LAB: Postgres DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="postgres/postgres.html#postgres-db-vm">Postgres DB VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgres/postgres.html#monitoring-vm">Monitoring VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgres/postgres.html#hammer-db">Hammer DB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vdbench/vdbench.html">LAB: VDBench</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vdbench/vdbench.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vdbench/vdbench.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vdbench/vdbench.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vdbench/vdbench.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vdbench/vdbench.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vdbench/vdbench.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vdbench/vdbench.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vdbench/vdbench.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="terraform/terraform.html">LAB: Terraform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="terraform/terraform.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terraform/terraform.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terraform/terraform.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terraform/terraform.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terraform/terraform.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terraform/terraform.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terraform/terraform.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terraform/terraform.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="oracle/oracle.html">LAB: Oracle DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="oracle/oracle.html#gcp">GCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oracle/oracle.html#azure">Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oracle/oracle.html#aws-ec2">AWS EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oracle/oracle.html#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="oracle/oracle.html#karbon">Karbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oracle/oracle.html#google-gke">Google GKE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oracle/oracle.html#azure-aks">Azure AKS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oracle/oracle.html#amazon-eks">Amazon EKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption"><span class="caption-text">Labs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="postgres/postgres.html">LAB: Postgres DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vdbench/vdbench.html">LAB: VDBench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="terraform/terraform.html">LAB: Terraform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle/oracle.html">LAB: Oracle DB</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <div class="toctree-wrapper compound" id="labs">
+</div>
+<div class="section" id="apj-global-accounts-se-labs">
+<h1>APJ Global Accounts SE Labs<a class="headerlink" href="#apj-global-accounts-se-labs" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to APJ GA SE labs collection!
+Please refer to the OneDrive/Sharepoint/Teams share for the lab access details. This collection is internal-only, so please do not share the content with any 3rd party.</p>
+<p>Note: Generally, labs are not configured to be secure. Please do not use any lab guide as-is to setup production environment.</p>
+<div class="section" id="validated-labs">
+<h2>Validated labs<a class="headerlink" href="#validated-labs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="postgres/postgres.html#postgres"><span class="std std-ref">LAB: Postgres DB</span></a></p></li>
+<li><p><a class="reference internal" href="vdbench/vdbench.html#vdbench"><span class="std std-ref">LAB: VDBench</span></a></p></li>
+<li><p><a class="reference internal" href="terraform/terraform.html#terraform"><span class="std std-ref">LAB: Terraform</span></a></p></li>
+<li><p><a class="reference internal" href="oracle/oracle.html#oracle"><span class="std std-ref">LAB: Oracle DB</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="wip-labs">
+<h2>WIP Labs<a class="headerlink" href="#wip-labs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="calm1/calm1.html#calm1"><span class="std std-ref">LAB: Calm VPC 3-Tier app</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="contributions">
+<span id="cloudinit"></span><h2>Contributions<a class="headerlink" href="#contributions" title="Permalink to this headline">¶</a></h2>
+<p>Please help to make this collection better! If you have a lab to share, please reach out to <a class="reference external" href="mailto:maksim&#46;malygin&#37;&#52;&#48;nutanix&#46;com">maksim<span>&#46;</span>malygin<span>&#64;</span>nutanix<span>&#46;</span>com</a>.</p>
+</div>
+<div class="section" id="default-cloud-init-script">
+<h2>Default Cloud-Init Script<a class="headerlink" href="#default-cloud-init-script" title="Permalink to this headline">¶</a></h2>
+<p>Use this cloud-init script if there is no VM-specific file mentioned in a lab.</p>
+<p>Notes:
+1. Firewall and SELinux disabled by default.</p>
+<blockquote>
+<div><div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1">#cloud-config</span>
+<span class="nt">disable_root</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">ssh_enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">ssh_pwauth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+<span class="c1">#create user</span>
+<span class="nt">users</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nutanix</span>
+    <span class="nt">groups</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sudo</span>
+    <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
+    <span class="nt">lock_passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">sudo</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL&#39;</span><span class="p p-Indicator">]</span>
+    <span class="nt">passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$6$4guEcDvX$HBHMFKXp4x/Eutj0OW5JGC6f1toudbYs.q.WkvXGbUxUTzNcHawKRRwrPehIxSXHVc70jFOp3yb8yZgjGUuET.</span>
+<span class="c1">#set password   </span>
+<span class="c1">#chpasswd:</span>
+<span class="c1">#    list: |</span>
+<span class="c1">#        SETYOURNAME:SETYOURPASSWORD</span>
+<span class="c1">#    expire: False</span>
+
+<span class="nt">yum_repos</span><span class="p">:</span>
+  <span class="nt">epel-release</span><span class="p">:</span>
+    <span class="nt">baseurl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://download.fedoraproject.org/pub/epel/7/$basearch</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">failovermethod</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">priority</span>
+    <span class="nt">gpgcheck</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">gpgkey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Extra Packages for Enterprise Linux 7 - Release</span>
+
+<span class="nt">package_update</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">package_upgrade</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">packages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gcc-c++</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">make</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">unzip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bash-completion</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python-pip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntp</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntpdate</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python36</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python36-setuptools</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">htop</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wget</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">iotop</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">xfs*</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">unzip</span> 
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lvm2*</span>
+
+<span class="nt">runcmd</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl stop firewalld</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl disable firewalld</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/sbin/setenforce 0</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sed -i -e &#39;s/enforcing/disabled/g&#39; /etc/selinux/config</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/bin/python3.6 -m ensurepip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install -U pip</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl restart ntpd</span>
+
+<span class="nt">final_message</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CentOS 7 Machine setup successfully!</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/index.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2018 Nutanix.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
