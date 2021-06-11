@@ -1,0 +1,8 @@
+{
+    "ip_address" : "10.139.80.175",
+    "username" : "admin",
+    "password" : "Nutanix@123",
+    "project_name" : "python33",
+    "network1_uuid" : "c3ec0b2b-c33a-4a97-89d6-76c5f1583439",
+    "network2_uuid" : "de61ca11-1ff8-401b-bfcb-a0c22ca7f898"
+}

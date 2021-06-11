@@ -1,0 +1,4 @@
+  - job_name: 'Node_exporter_cvbench'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['VDBENCH_SERVER_IP:9100']

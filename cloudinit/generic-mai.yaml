@@ -1,0 +1,65 @@
+#cloud-config
+disable_root: False
+ssh_enabled: True
+ssh_pwauth: True
+
+#create user
+users:
+  - name: nutanix
+    groups: sudo
+    shell: /bin/bash
+    lock_passwd: false
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    passwd: $6$4guEcDvX$HBHMFKXp4x/Eutj0OW5JGC6f1toudbYs.q.WkvXGbUxUTzNcHawKRRwrPehIxSXHVc70jFOp3yb8yZgjGUuET.
+#set password   
+#chpasswd:
+#    list: |
+#        SETYOURNAME:SETYOURPASSWORD
+#    expire: False
+
+timezone: Asia/Singapore
+
+yum_repos:
+  epel-release:
+    baseurl: http://download.fedoraproject.org/pub/epel/7/$basearch
+    enabled: true
+    failovermethod: priority
+    gpgcheck: true
+    gpgkey: http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+    name: Extra Packages for Enterprise Linux 7 - Release
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - gcc-c++
+  - make
+  - unzip
+  - bash-completion
+  - python-pip
+  - ntp
+  - ntpdate
+  - python36
+  - python36-setuptools
+  - htop 
+  - wget 
+  - iotop 
+  - xfs* 
+  - bc 
+  - unzip 
+  - lvm2*
+  - java-1.8.0-openjdk
+  - stress-ng
+
+runcmd:
+  - systemctl stop firewalld
+  - systemctl disable firewalld
+  - /sbin/setenforce 0
+  - sed -i -e 's/enforcing/disabled/g' /etc/selinux/config
+  - /bin/python3.6 -m ensurepip
+  - pip install -U pip
+  - ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org
+  - systemctl restart ntpd
+  - reboot
+
+final_message: CentOS 7 Machine setup successfully!

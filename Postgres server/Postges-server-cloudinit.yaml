@@ -1,0 +1,50 @@
+#cloud-config
+disable_root: False
+ssh_enabled: True
+ssh_pwauth: True
+ 
+#create user
+users:
+  - name: SETYOURNAME
+    groups: sudo
+    shell: /bin/bash
+    lock_passwd: false
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+#set password   
+chpasswd:
+    list: |
+        SETYOURNAME:SETYOURPASSWORD
+    expire: False
+
+#postgres tuning
+write_files:
+    - content: ACTION=="add|change", SUBSYSTEM=="block", RUN+="/bin/sh -c '/bin/echo 1024 > /sys%p/queue/max_sectors_kb'"
+      path: /etc/udev/rules.d/71-block-max-sectors.rules
+      permissions: '0644'
+      owner: root:root
+    - content: |
+        #!/bin/bash
+       
+        vm_memory_kb_80_percent=`grep MemTotal /proc/meminfo | awk '{print $2}' | xargs -I {} echo "{}*0.8" | bc | awk -F"." ' {print $1}'`
+        hugepage_size=`grep Hugepagesize /proc/meminfo | awk {'print $2'}`
+        nr_huge_pages=`echo $(( vm_memory_kb_80_percent / $hugepage_size +1))`
+       
+        echo "#PostgreSQL BPG
+             vm.overcommit_memory=1
+             vm.dirty_background_ratio=5
+             vm.dirty_ratio=15
+             vm.dirty_expire_centisecs=500
+             vm.dirty_writeback_centisecs=100
+             vm.swappiness=0
+             vm.nr_hugepages=$nr_huge_pages" | sudo tee -a /etc/sysctl.conf
+        sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config   
+        sudo cp /etc/default/grub /etc/default/grub.bak
+        sudo sed -i 's/quiet/iommu=soft elevator=noop apm=off transparent_hugepage=never powersaved=off/g' /etc/default/grub
+        sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+        sudo reboot
+      path: /tmp/vm_setup.sh
+      permissions: '0644'
+      owner: root:root
+runcmd:
+    - sudo yum install -y bc
+    - bash /tmp/vm_setup.sh > /tmp/t.out

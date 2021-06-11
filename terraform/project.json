@@ -1,0 +1,40 @@
+{
+    "api_version": "3.1.0",
+    "metadata": {
+      "use_categories_mapping": false,
+      "kind": "project",
+      "name": "string"
+    },
+    "spec": {
+      "name": "project 1",
+      "description": "Project 1 desc",   
+        "resources": {
+            "resource_domain": {
+              "resources": [
+                {
+                  "limit": 0,
+                  "resource_type": "VMS"
+                }
+              ]
+            },
+        "subnet_reference_list": [
+            {
+                "kind": "subnet",
+                "uuid": "c3ec0b2b-c33a-4a97-89d6-76c5f1583439"
+            },
+            {
+                "kind": "subnet",
+                "uuid": "de61ca11-1ff8-401b-bfcb-a0c22ca7f898"
+              }
+        ],
+        "external_user_group_reference_list": [],
+        "user_reference_list": [
+          {
+            "kind": "user",
+            "uuid": "8d41e42d-624e-56ee-9dc9-7e48216b6b1b",
+            "name": "administrator@apjga.local"
+          }
+        ]
+      }
+    }
+  }

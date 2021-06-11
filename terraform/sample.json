@@ -1,0 +1,160 @@
+{
+  "api_version": "3.1.0",
+  "metadata": {
+    "kind": "project",
+    "uuid": "686ced63-8c18-43ef-8769-b4ed86a1cdc5"
+  },
+  "spec": {
+    "project_detail": {
+      "name": "test project1",
+      "description": "test desc1",
+      "resources": {
+        "subnet_reference_list": [
+          {
+            "kind": "subnet",
+            "uuid": "c3ec0b2b-c33a-4a97-89d6-76c5f1583439"
+          },
+          {
+            "kind": "subnet",
+            "uuid": "de61ca11-1ff8-401b-bfcb-a0c22ca7f898"
+          }
+        ],
+        "user_reference_list": [
+          {
+            "kind": "user",
+            "uuid": "8d41e42d-624e-56ee-9dc9-7e48216b6b1b",
+            "name": "administrator@apjga.local"
+          }
+        ],
+        "external_user_group_reference_list": []
+      }
+    },
+    "access_control_policy_list": [
+      {
+        "operation": "ADD",
+        "metadata": {
+          "kind": "access_control_policy"
+        },
+        "acp": {
+          "name": "prismui-name-16b33e767d78",
+          "description": "prismui-desc-eb54997ea8dc",
+          "resources": {
+            "role_reference": {
+              "kind": "role",
+              "uuid": "4051b7b1-af34-454a-88b5-144a0b464fd9"
+            },
+            "user_reference_list": [
+              {
+                "kind": "user",
+                "uuid": "8d41e42d-624e-56ee-9dc9-7e48216b6b1b",
+                "name": "administrator@apjga.local"
+              }
+            ],
+            "filter_list": {
+              "context_list": [
+                {
+                  "scope_filter_expression_list": [
+                    {
+                      "operator": "IN",
+                      "left_hand_side": "PROJECT",
+                      "right_hand_side": {
+                        "uuid_list": [
+                          "686ced63-8c18-43ef-8769-b4ed86a1cdc5"
+                        ]
+                      }
+                    }
+                  ],
+                  "entity_filter_expression_list": [
+                    {
+                      "operator": "IN",
+                      "left_hand_side": {
+                        "entity_type": "ALL"
+                      },
+                      "right_hand_side": {
+                        "collection": "ALL"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "entity_filter_expression_list": [
+                    {
+                      "operator": "IN",
+                      "left_hand_side": {
+                        "entity_type": "cluster"
+                      },
+                      "right_hand_side": {
+                        "uuid_list": [
+                          "00058cbc-ba47-ea45-0000-0000000055ad"
+                        ]
+                      }
+                    },
+                    {
+                      "operator": "IN",
+                      "left_hand_side": {
+                        "entity_type": "image"
+                      },
+                      "right_hand_side": {
+                        "collection": "ALL"
+                      }
+                    },
+                    {
+                      "operator": "IN",
+                      "left_hand_side": {
+                        "entity_type": "category"
+                      },
+                      "right_hand_side": {
+                        "collection": "ALL"
+                      }
+                    },
+                    {
+                      "operator": "IN",
+                      "left_hand_side": {
+                        "entity_type": "marketplace_item"
+                      },
+                      "right_hand_side": {
+                        "collection": "SELF_OWNED"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+
+
+-----
+"default_subnet_reference": {
+    "kind": "subnet",
+    "name": "string",
+    "uuid": "string"
+  },
+  "environment_reference_list": [
+    {
+      "kind": "environment",
+      "name": "string",
+      "uuid": "string"
+    }
+  ],
+  "account_reference_list": [
+    {
+      "kind": "account",
+      "name": "string",
+      "uuid": "string"
+    }
+  ],
+  "resources": {
+    "resource_domain": {
+      "resources": [
+        {
+          "limit": 0,
+          "resource_type": "string"
+        }
+      ]
+    },
